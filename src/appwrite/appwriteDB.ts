@@ -68,6 +68,22 @@ export class DBAppwriteService {
             throw error
         }
     }
+
+    async recentListData(userId:string){
+        try {
+            return await this.databases.listDocuments<ProjectDocument>(
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId,
+                [
+                    Query.equal('userId', userId),
+                    Query.orderDesc("$createdAt"),
+                    Query.limit(5)
+                ]
+            ) 
+        } catch (error) {
+            throw error
+        }
+    }
 }
 
 const dbAppwriteService = new DBAppwriteService();

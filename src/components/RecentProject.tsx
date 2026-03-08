@@ -1,51 +1,29 @@
-type Project = {
-    id: number;
-    name: string;
-    client: string;
-    status: string;
-    time: string;
-};
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "../store/store";
+import { useEffect } from "react";
+import appwriteService from "../appwrite/appwrite";
+import dbAppwriteService from "../appwrite/appwriteDB";
+import { setPojects } from "../store/addProjectSlice";
 
 function RecentProject() {
+    const projectData = useSelector((state:RootState)=> state.projects.data)
+    const dispatch = useDispatch<AppDispatch>()
 
-    const projectData: Project[] = [
-        {
-            id: 1,
-            name: "Website Redesign",
-            client: "Dizy Lio",
-            status: "In Progress",
-            time: "2026-03-28",
-        },
-        {
-            id: 2,
-            name: "Mobile App UI",
-            client: "Sarah Lee",
-            status: "Completed",
-            time: "2026-04-02",
-        },
-        {
-            id: 3,
-            name: "Mobile App UI",
-            client: "Sarah Lee",
-            status: "Completed",
-            time: "2026-04-02",
-        },
-        {
-            id: 4,
-            name: "Mobile App UI",
-            client: "Sarah Lee",
-            status: "Completed",
-            time: "2026-04-02",
-        },
-        {
-            id: 5,
-            name: "Mobile App UI",
-            client: "Sarah Lee",
-            status: "Completed",
-            time: "2026-04-02",
-        },
-    ]
+    useEffect(()=>{
+        const fetchProject = async () => {
+            try {
+                const user = await appwriteService.getCurrentUser()
 
+                if (!user) return
+
+                const response = await dbAppwriteService.recentListData(user.$id)
+                dispatch(setPojects(response.documents))
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchProject()
+    },[dispatch])
 
     return (
         <div className="bg-(--zd5-color) dark:bg-(--zdark-color) rounded-[10px] border border-stone-200 dark:border-(--zd12-color) shadow-sm overflow-hidden">
@@ -63,7 +41,7 @@ function RecentProject() {
                     {projectData && projectData.length > 0 ? (
                         <tbody className="divide-y divide-stone-200 dark:divide-(--zd125-color)">
                             {projectData.map((prop) => (
-                                <tr key={prop.id} className="group dark:bg-[#18181b] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition">
+                                <tr key={prop.$id} className="group dark:bg-[#18181b] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition">
                                     <td className="capitalize px-6 py-4 text-sm font-medium text-stone-800 dark:text-(--zd1-color)">{prop.name}</td>
                                     <td className="capitalize px-6 py-4 text-sm text-stone-600 dark:text-(--zd5-color)">{prop.client}</td>
                                     <td className="px-6 py-4">
