@@ -1,0 +1,106 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+   --zd1-color:#089BDC;
+   --zd2-color:#089cdc31;
+   --zd3-color:#ff8c00;
+   --zd4-color:#ffc36861;
+   --zd5-color:#ffffff;
+   --zd6-color:#000000;
+   --zdark-color:#212121;
+   --zd7-color:#828282;
+   --zd8-color:#181818;
+   --zd9-color:#F8FAFC;
+   --zd10-color:#eff6ff;
+   --zd11-color:#155DFC;
+   --zd11a-color:#0F4CD7;
+   --zd12-color:#0D1117;
+   --zd13-color:#6a7282;
+   --zd14-color:#1e2939;
+   --zd15-color:#0B1120;
+   --zd16-color:#00C853;
+   --zd17-color:#dffcea;
+
+
+    /* for Root */
+
+    /* Background Gradient (Light) */
+    --rc1: #f9fafb;
+    --rc2: #ffffff;
+    --rc3: #eff6ff;
+
+    /* Background Gradient (Dark) */
+    --rc4: #000000;
+    --rc5: #18181b;
+    --rc6: rgba(30, 58, 138, 0.1);
+
+    /* Primary Gradient */
+    --rc7: #2563eb;
+    --rc8: #7c3aed;
+    --rc9: #1e40af;
+
+    /* Hover Gradient */
+    --rc10: #1d4ed8;
+    --rc11: #6d28d9;
+
+    /* Green */
+    --rc12: #dcfce7;
+    --rc13: rgba(20, 83, 45, 0.3);
+    --rc14: #15803d;
+    --rc15: #22c55e;
+    --rc16: #4ade80;
+
+    /* Text */
+    --rc17: #111827;
+    --rc18: #6b7280;
+    --rc19: #4b5563;
+    --rc20: #d1d5db;
+    --rc21: #ffffff;
+    --rc22: #9ca3af;
+    --rc23: #d4d4d8;
+
+    /* Borders */
+    --rc24: #e5e7eb;
+    --rc25: #3f3f46;
+
+    /* Blue */
+    --rc26: #dbeafe;
+    --rc27: rgba(30, 58, 138, 0.3);
+    --rc28: #2563eb;
+    --rc29: #60a5fa;
+
+    /* Status */
+    --rc30: #ef4444;
+    --rc31: #eab308;
+    
+    /* for Root */
+}
+
+
+@theme inline {
+    --side-barbg:var(--zd12-color);
+    --side-bar-text:var(--zd6-color);
+    --side-bar-sce-text:var(--zd13-color);
+    --side-bar-option-hover:var(--zd14-color);
+    --side-bar-option-active:var(--zd11-color);
+    --side-bar-option-active-text:var(--zd5-color);
+    --side-bar-option-shadow:var();
+
+    --top-barbg:var(--zd5-color);
+    --top-bar-text:var(--zd6-color);
+    --top-welcm-text:var(--zd11-color);
+    --top-welcm-bg:var(--zd10-color);
+    --top-welcm-icon:var(--zd1-color);
+
+    --body-bg:var(--zd5-color);
+    --body-text:var(--zd6-color);
+
+    /* font family */
+    --font-one: 'Inter', sans-serif;
+    --font-two: 'Sora', sans-serif;
+    /* font family */
+}
