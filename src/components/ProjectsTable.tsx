@@ -38,6 +38,23 @@ function ProjectsTable() {
         }
     }
 
+    const getStatusColor = (status:string) => {
+        const normalizedStatus = status.trim().toLowerCase()
+
+        switch (normalizedStatus) {
+            case "in progress":
+            case "active project":
+            case "active projects":
+                return "bg-(--zd10-color) text-(--zd11-color)"
+            case "completed":
+                return 'bg-(--zd17-color) text-(--zd16-color)'
+            case "pending":
+                return "bg-amber-50 text-amber-600"
+            default:
+                return "bg-gray-100 text-gray-600"
+        }
+    }
+
     return (
         <div className="bg-(--zd5-color) dark:bg-(--zdark-color) rounded-[10px] border border-stone-200 dark:border-(--zd12-color) shadow-sm overflow-hidden">
             <div className="max-h-[28em] overflow-y-auto">
@@ -58,7 +75,7 @@ function ProjectsTable() {
                                     <td className="capitalize px-6 py-4 text-sm font-medium text-stone-800 dark:text-(--zd1-color)">{prop.name}</td>
                                     <td className="capitalize px-6 py-4 text-sm text-stone-600 dark:text-(--zd5-color)">{prop.client}</td>
                                     <td className="px-6 py-4">
-                                        <span className={`px-3 py-1 text-xs font-medium rounded-full ${prop.status !== "Completed" ? 'bg-amber-50 text-amber-600' : 'bg-(--zd17-color) text-(--zd16-color)'}`}>{prop.status}</span>
+                                        <span className={`px-3 py-1 text-xs font-medium rounded-full ${getStatusColor(prop.status)}`}>{prop.status}</span>
                                     </td>
                                     <td className="flex justify-between items-center px-6 py-4 text-sm text-stone-600 dark:text-(--zd5-color)">
                                         {new Date(prop.time).toLocaleDateString()} 

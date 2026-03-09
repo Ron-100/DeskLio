@@ -24,6 +24,9 @@ function Dashboard() {
         //It's check and calculate how completed projects are there
         const completedProjects = tableData.filter((p) => (p.status === "Completed")).length;
         
+        //It's check and calculate how completed projects are there
+        const pendingProjects = tableData.filter((p) => (p.status === "Pending")).length;
+        
     // Dynamic Data Table //
 
 
@@ -56,9 +59,9 @@ function Dashboard() {
             },
             {
                 id:cardId,
-                title: "Pending Projects",
+                title: "Pending",
                 content: "Projects awaiting progress",
-                value: completedProjects,
+                value: pendingProjects,
                 icon: <MdOutlinePending className="text-xl text-(--zd1-color)" />,
             },
         ];

@@ -99,6 +99,7 @@ export default function AddProjectForm() {
                                 outline-none transition text-sm">
                         <option>In Progress</option>
                         <option>Completed</option>
+                        <option>Pending</option>
                     </select>
                 </div>
 
