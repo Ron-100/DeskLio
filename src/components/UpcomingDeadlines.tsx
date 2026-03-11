@@ -81,14 +81,21 @@ export default function ProjectDashboard() {
     <div className="">
       <div className="">
         <div className="space-y-3">
-          {upcomingDeadlines.map((project) => (
+          {upcomingDeadlines.length > 0 ? 
+            upcomingDeadlines.map((project) => (
             <ProjectItem
               key={project.name}
               name={project.name}
               client={project.client}
               daysLeft={getDaysleft(project.time)}
             />
-          ))}
+          ))
+          : 
+            <div className="flex flex-col items-center justify-center h-[10em] text-gray-500 gap-2 border-gray-300">
+              <p className="text-lg">Empty</p>
+              <p className="text-sm">Start by adding your first project.</p>
+            </div>
+          }
         </div>
       </div>
     </div>
