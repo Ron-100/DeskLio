@@ -21,6 +21,13 @@ const addProjectSlice = createSlice({
         setPojects:(state,action: PayloadAction<DataType[]>) => {
             state.data = action.payload
         },
+        updateProjectStatus: (state, action) => {
+            const { id, status } = action.payload
+            const project = state.data.find(p => p.$id === id)
+            if(project){
+                project.status = status
+            }
+        },
         deletePoject: (state, action: PayloadAction<string>) => {
             state.data = state.data.filter((project) =>  project.$id !== action.payload);
         },
@@ -29,5 +36,5 @@ const addProjectSlice = createSlice({
 })
 
 
-export const {addProject, setPojects, deletePoject} = addProjectSlice.actions;
+export const {addProject, setPojects, deletePoject, updateProjectStatus} = addProjectSlice.actions;
 export default addProjectSlice.reducer;

@@ -55,6 +55,15 @@ export class DBAppwriteService {
         }
     }
 
+    async updateData (id: string, data:any) {
+        return await this.databases.updateDocument(
+            conf.appwriteDatabaseId,
+            conf.appwriteCollectionId,
+            id,
+            data
+        )
+    }
+
     async listData(userId:string){
         try {
             return await this.databases.listDocuments<ProjectDocument>(

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import type { AppDispatch, RootState } from "../store/store"
 import { MdDelete } from "react-icons/md";
-import { deletePoject, setPojects } from "../store/addProjectSlice";
+import { deletePoject, setPojects, updateProjectStatus} from "../store/addProjectSlice";
 import dbAppwriteService from "../appwrite/appwriteDB";
 import { useEffect } from "react";
 
@@ -25,7 +25,7 @@ function ProjectsTable() {
             }
         }
         fetchProject()
-    },[dispatch])
+    },[user, dispatch])
 
     const handleDelete = async (id:string) => {
         try {
@@ -68,6 +68,20 @@ function ProjectsTable() {
     //     return "bg-gray-100 text-gray-600"
     // }
 
+    const updateStatus = async (id:string, status:string) => {
+        try {
+
+            await dbAppwriteService.updateData(id, {
+                status: status
+            })
+
+            dispatch(updateProjectStatus({ id, status }))
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <div className="bg-(--zd5-color) dark:bg-(--zdark-color) rounded-[10px] border border-stone-200 dark:border-(--zd12-color) shadow-sm overflow-hidden">
             <div className="max-h-[28em] overflow-y-auto">
@@ -88,7 +102,16 @@ function ProjectsTable() {
                                     <td className="capitalize px-6 py-4 text-sm font-medium text-stone-800 dark:text-(--zd1-color)">{prop.name}</td>
                                     <td className="capitalize px-6 py-4 text-sm text-stone-600 dark:text-(--zd5-color)">{prop.client}</td>
                                     <td className="px-6 py-4">
-                                        <span className={`px-3 py-1 text-xs font-medium rounded-full ${getStatusColor(prop.status)}`}>{prop.status}</span>
+                                        <select
+                                            value={prop.status}
+                                            onChange={(e)=>updateStatus(prop.$id, e.target.value)}
+                                            className={`px-3 py-1 text-xs font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-slate-200 cursor-pointer ${getStatusColor(prop.status)}`}
+                                        >
+                                            <option>In Progress</option>
+                                            <option>Completed</option>
+                                            <option>Pending</option>
+                                        </select>
+                                        {/* <span >{prop.status}</span> */}
                                     </td>
                                     <td className="flex justify-between items-center px-6 py-4 text-sm text-stone-600 dark:text-(--zd5-color)">
                                         {new Date(prop.time).toLocaleDateString()} 
