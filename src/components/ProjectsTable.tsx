@@ -4,18 +4,16 @@ import { MdDelete } from "react-icons/md";
 import { deletePoject, setPojects } from "../store/addProjectSlice";
 import dbAppwriteService from "../appwrite/appwriteDB";
 import { useEffect } from "react";
-import appwriteService from "../appwrite/appwrite";
 
 function ProjectsTable() {
 
+    const user = useSelector((state:RootState) => state.auth.data)
     const projectData = useSelector((state:RootState) => state.projects.data)
     const dispatch = useDispatch<AppDispatch>()
 
     useEffect(()=>{
         const fetchProject = async () => {
             try {
-                const user = await appwriteService.getCurrentUser()
-
                 if (!user) return
                 
                 const response = await dbAppwriteService.listData(user.$id)
@@ -54,6 +52,21 @@ function ProjectsTable() {
                 return "bg-gray-100 text-gray-600"
         }
     }
+
+    // const getStatusColor = (status:string) => {
+    // const normalized = status.toLowerCase()
+
+    // if (normalized === "in progress")
+    //     return "bg-blue-50 text-blue-600"
+
+    // if (normalized === "completed")
+    //     return "bg-green-50 text-green-600"
+
+    // if (normalized === "pending")
+    //     return "bg-amber-50 text-amber-600"
+
+    //     return "bg-gray-100 text-gray-600"
+    // }
 
     return (
         <div className="bg-(--zd5-color) dark:bg-(--zdark-color) rounded-[10px] border border-stone-200 dark:border-(--zd12-color) shadow-sm overflow-hidden">
